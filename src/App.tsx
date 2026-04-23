@@ -164,7 +164,14 @@ export default function App() {
   }
 
   if(!session) return <AuthScreen mode={authMode} setMode={setAuthMode} onSuccess={()=>{}}/>;
-  if(!profile) return <div style={{display:"flex",alignItems:"center",justifyContent:"center",minHeight:"100vh",fontSize:14,color:"#888"}}>Memuat profil...</div>;
+  if(!profile) return (
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"100vh",fontSize:14,color:"#888",gap:16}}>
+      <div>Memuat profil...</div>
+      <button onClick={()=>supabase.auth.signOut()} style={{fontSize:12,color:"#c0392b",background:"none",border:"1px solid #c0392b",padding:"6px 16px",borderRadius:20,cursor:"pointer"}}>
+        Keluar & Coba Lagi
+      </button>
+    </div>
+  );
 
   const todayRec=records.find(r=>r.date===todayKey());
   const todayIbadah=todayRec?.ibadah_data||{};
